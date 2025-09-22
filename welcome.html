@@ -2,8 +2,57 @@
 <html>
 <head>
   <title>Welcome</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5em;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+      line-height: 1.5;
+      margin: 0 0 2em 0;
+    }
+    a {
+      text-decoration: none;
+      background-color: #9b59b6;
+      color: white;
+      padding: 12px 30px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 4px 12px rgba(155,89,182,0.5);
+      transition: background-color 0.3s;
+    }
+    a:hover {
+      background-color: #71368a;
+    }
+  </style>
 </head>
 <body>
+
   <h1>Welcome to the protected page!</h1>
+  <p>Congratulations on successfully logging in! This page is secured and only accessible to authenticated users. Feel free to explore the content made exclusively for authorized members.</p>
+
+  <a href="index.html">Logout</a>
+
 </body>
 </html>

@@ -3,128 +3,135 @@
 <head>
   <title>Login Page</title>
   <style>
-  body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-
-  form {
-    background: white;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    width: 350px;
-  }
-
-  h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-  font-weight: bold;
-  font-size: 28px;
-}
-
-  label, input[type=text], input[type=password] {
-    display: block;
-    width: 100%;
-    font-size: 1rem;
-    margin-bottom: 15px;
-  }
-
-  input[type=text], input[type=password] {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-  }
-
-  input[type=text]:focus, input[type=password]:focus {
-    border-color: #9b59b6;
-    outline: none;
-  }
-
-  input[type=submit] {
-    background-color: #9b59b6;
-    border: none;
-    color: white;
-    padding: 12px 20px;
-    text-align: center;
-    font-size: 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-  }
-
-  input[type=submit]:hover {
-    background-color: #71368a;
-  }
-
-  #message {
-    text-align: center;
-    margin-top: 15px;
-    font-weight: bold;
-  }
-</style>
-
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    form {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+      font-weight: bold;
+      font-size: 28px;
+    }
+    label, input[type=text], input[type=password] {
+      display: block;
+      width: 100%;
+      font-size: 1rem;
+      margin-bottom: 15px;
+    }
+    input[type=text], input[type=password] {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+    input[type=text]:focus, input[type=password]:focus {
+      border-color: #9b59b6;
+      outline: none;
+    }
+    input[type=submit] {
+      background-color: #9b59b6;
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    input[type=submit]:hover {
+      background-color: #71368a;
+    }
+    #message {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+      min-height: 24px; /* reserve space */
+      color: red;
+    }
+  </style>
 </head>
 <body>
-  <h2>Login Form</h2>
+
   <form id="loginForm">
-    Username: <input type="text" id="username"><br><br>
-    Password: <input type="password" id="password"><br><br>
+    <h2>Login Form</h2>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" autocomplete="username">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" autocomplete="current-password">
+
     <input type="submit" value="Login">
+
+    <p id="message"></p>
   </form>
-  <p id="message"></p>
 
-<script>
-  const correctUsername = "user123";
-  const correctPassword = "pass123";
-  let attemptsLeft = 3; // max attempts
+  <script>
+    const correctUsername = "user123";
+    const correctPassword = "pass123";
+    let attemptsLeft = 3;
 
-  document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // prevent form submit
-    
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+    const loginForm = document.getElementById('loginForm');
     const message = document.getElementById('message');
-    const submitBtn = document.querySelector('#loginForm input[type="submit"]');
+    const submitBtn = loginForm.querySelector('input[type="submit"]');
 
-    if (attemptsLeft > 0) {
-      if (username === correctUsername && password === correctPassword) {
-        message.style.color = 'green';
-        message.textContent = 'Login successful! Redirecting...';
-        setTimeout(() => {
-          window.location.href = 'welcome.html';
-        }, 1000);
-      } else {
-        attemptsLeft--;
-        message.style.color = 'red';
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
 
-        if (username !== correctUsername && password !== correctPassword) {
-          message.textContent = `Invalid details. Attempts left: ${attemptsLeft}`;
-        } else if (username !== correctUsername) {
-          message.textContent = `Invalid username. Attempts left: ${attemptsLeft}`;
-        } else if (password !== correctPassword) {
-          message.textContent = `Invalid password. Attempts left: ${attemptsLeft}`;
-        }
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
 
-        if (attemptsLeft === 0) {
-          message.textContent = 'Too many failed attempts. Please wait 10 seconds.';
-          submitBtn.disabled = true;
-
+      if (attemptsLeft > 0) {
+        if (username === correctUsername && password === correctPassword) {
+          message.style.color = 'green';
+          message.textContent = 'Login successful! Redirecting...';
           setTimeout(() => {
-            attemptsLeft = 3;
-            submitBtn.disabled = false;
-            message.textContent = '';
-          }, 10000); // 10 seconds delay
+            window.location.href = 'welcome.html';
+          }, 1000);
+        } else {
+          attemptsLeft--;
+          message.style.color = 'red';
+
+          if (username !== correctUsername && password !== correctPassword) {
+            message.textContent = `Invalid details. Attempts left: ${attemptsLeft}`;
+          } else if (username !== correctUsername) {
+            message.textContent = `Invalid username. Attempts left: ${attemptsLeft}`;
+          } else if (password !== correctPassword) {
+            message.textContent = `Invalid password. Attempts left: ${attemptsLeft}`;
+          }
+
+          if (attemptsLeft === 0) {
+            message.textContent = 'Too many failed attempts. Please wait 10 seconds.';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+              attemptsLeft = 3;
+              submitBtn.disabled = false;
+              message.textContent = '';
+            }, 10000); // 10 seconds lockout
+          }
         }
       }
-    }
-  });
-</script>
+    });
+  </script>
+
+</body>
+</html>
